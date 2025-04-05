@@ -19,6 +19,23 @@ cd TrabalhoEXP
 
 ---
 
+## 📦 Banco de Dados
+
+Este projeto utiliza **MySQL** como banco de dados.
+
+- O script de criação do banco e das tabelas está em:  
+  `SQL/CREATE_DB.sql`
+
+- Para popular o banco com dados de exemplo, utilize (opcional):  
+  `SQL/INSERTS.sql`
+
+> Execute o `CREATE_DB.sql` antes de iniciar o backend.
+
+- Também tem o arquivo de exportação do banco de dados em:
+  `SQL/DBexport.sql`
+
+---
+
 ### 2. Configuração do Backend
 
 ```bash
@@ -33,7 +50,7 @@ npm install
 - dotenv
 - mysql2
 
-#### 🔐 Crie o arquivo `.env` com as variáveis do banco:
+#### 🔐 Modifique o arquivo `.env` com as variáveis do banco:
 
 ```env
 DB_HOST=localhost
@@ -70,27 +87,6 @@ npm run dev
 ```
 
 > O frontend rodará em `http://localhost:5173`.
-
----
-
-## 📦 Banco de Dados
-
-Este projeto utiliza **MySQL** como banco de dados. Para configurar corretamente:
-
-### 1. Crie o banco de dados e as tabelas
-
-No seu cliente MySQL (como o MySQL Workbench, DBeaver ou linha de comando), execute o script:
-
-```bash
-mysql -u seu_usuario -p seu_banco < SQL/CREATE_DB.sql
-
-```
-### 2. Para usar como exemplo também tem um arquivo de inserts, execute:
-
-```sql
-SQL/INSERTS.sql
-
-```
 
 ---
 
