@@ -5,18 +5,18 @@ import "../styles/DetalhesUsuario.css";
 
 // Função para gerar cores (igual à usada na lista de usuários)
 const generateUserColor = (userId) => {
-    const colors = [
-      '#E57373', '#F06292', '#BA68C8', '#9575CD',
-      '#7986CB', '#64B5F6', '#4FC3F7', '#4DD0E1',
-      '#4DB6AC', '#81C784', '#AED581', '#DCE775',
-      '#FFF176', '#FFD54F', '#FFB74D', '#FF8A65'
-    ];
-    
-    const hash = Array.from(userId.toString())
-      .reduce((acc, char, index) => acc + (char.charCodeAt(0) * (index + 1)), 0);
-    
-    return colors[hash % colors.length];
-  };
+  const colors = [
+    "#E57373", "#F06292", "#BA68C8", "#9575CD",
+    "#7986CB", "#64B5F6", "#4FC3F7", "#4DD0E1",
+    "#4DB6AC", "#81C784", "#AED581", "#DCE775",
+    "#FFF176", "#FFD54F", "#FFB74D", "#FF8A65"
+  ];
+
+  const hash = Array.from(userId.toString())
+    .reduce((acc, char, index) => acc + (char.charCodeAt(0) * (index + 1)), 0);
+
+  return colors[hash % colors.length];
+};
 
 function DetalhesUsuario() {
   const { id } = useParams();
@@ -38,8 +38,7 @@ function DetalhesUsuario() {
 
   return (
     <div className="container">
-      <div className="app-bar">
-        <div className="app-bar-content">
+      <header className="app-bar">
           <h1 className="app-title">Detalhes do Usuário</h1>
           <button 
             className="secondary-button"
@@ -47,8 +46,7 @@ function DetalhesUsuario() {
           >
             Voltar
           </button>
-        </div>
-      </div>
+      </header>
 
       <div className="user-details-container">
         <div className="user-profile-card">

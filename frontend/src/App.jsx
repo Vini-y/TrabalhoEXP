@@ -3,6 +3,7 @@ import ListaUsuarios from "./pages/ListaUsuarios";
 import CadastroUsuario from "./pages/CadastroUsuario";
 import DetalhesUsuario from "./pages/DetalhesUsuario";
 import EditarUsuario from "./pages/EditarUsuario";
+import "./index.css";
 
 function App() {
   return (

@@ -10,22 +10,27 @@
   --text-secondary: #5f6368;
   --border-color: #e8e8e8;
   --divider-color: #e0e0e0;
+  --danger-color: #d93025;
+  --danger-hover: #b1271c;
+  --radius: 8px;
 }
 
 * {
-  font-family: 'Roboto', sans-serif;
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   background-color: var(--background);
+  color: var(--text-primary);
 }
 
+/* App Bar */
 .app-bar {
   background-color: var(--surface);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 16px 24px;
   position: sticky;
   top: 0;
@@ -46,25 +51,53 @@ body {
   color: var(--text-primary);
 }
 
+/* Botões */
+.primary-button,
+.secondary-button,
+.danger-button {
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+}
+
 .primary-button {
   background-color: var(--primary-color);
   color: white;
-  padding: 10px 24px;
-  border-radius: 4px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  transition: background-color 0.2s;
 }
 
 .primary-button:hover {
   background-color: var(--primary-hover);
 }
 
+.secondary-button {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.secondary-button:hover {
+  background-color: rgba(26, 115, 232, 0.05);
+}
+
+.danger-button {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.danger-button:hover {
+  background-color: var(--danger-hover);
+}
+
+/* Carregamento */
 .loading-container {
   padding: 16px;
+  text-align: center;
 }
 
 .progress-bar {
@@ -89,6 +122,17 @@ body {
   100% { transform: translateX(200%); }
 }
 
+/* Containers e Responsividade */
+.container {
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 24px;
+}
+
 @media (max-width: 600px) {
   .app-bar-content {
     flex-direction: column;
@@ -96,8 +140,14 @@ body {
     gap: 12px;
   }
 
-  .primary-button {
+  .primary-button,
+  .secondary-button,
+  .danger-button {
     width: 100%;
     justify-content: center;
+  }
+
+  .content {
+    padding: 0 16px;
   }
 }

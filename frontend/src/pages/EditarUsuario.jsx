@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
-import "../styles/EditarUsuario.css"
+import "../styles/EditarUsuario.css";
 
 function EditarUsuario() {
   const { id } = useParams();
@@ -37,18 +37,16 @@ function EditarUsuario() {
 
   return (
     <div className="container">
-      <div className="app-bar">
-        <div className="app-bar-content">
+      <header className="app-bar">
           <h1 className="app-title">Editar Usuário</h1>
           <button 
             type="button" 
-            className="secondary-button"
+            className="btn-secondary"
             onClick={() => navigate("/")}
           >
             Voltar
           </button>
-        </div>
-      </div>
+      </header>
 
       <div className="form-container">
         <form onSubmit={handleSubmit} className="user-form">
@@ -59,7 +57,7 @@ function EditarUsuario() {
                 name="nome"
                 value={form.nome}
                 onChange={handleChange}
-                placeholder="Nome"
+                placeholder="Nome completo"
                 required
               />
             </div>
@@ -70,7 +68,9 @@ function EditarUsuario() {
                 name="anoNascimento"
                 value={form.anoNascimento}
                 onChange={handleChange}
-                placeholder="Ano de Nascimento"
+                placeholder="Ano de nascimento"
+                min="1900"
+                max={new Date().getFullYear()}
                 required
               />
             </div>
@@ -81,7 +81,7 @@ function EditarUsuario() {
                 name="endereco"
                 value={form.endereco}
                 onChange={handleChange}
-                placeholder="Endereço"
+                placeholder="Endereço completo"
                 required
               />
             </div>
@@ -100,7 +100,8 @@ function EditarUsuario() {
                 name="cpf"
                 value={form.cpf}
                 onChange={handleChange}
-                placeholder="CPF"
+                placeholder="CPF (000.000.000-00)"
+                pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
                 required
               />
             </div>
@@ -111,14 +112,14 @@ function EditarUsuario() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="E-mail"
+                placeholder="E-mail válido"
                 required
               />
             </div>
           </div>
 
           <div className="form-actions">
-            <button type="submit" className="primary-button">
+            <button type="submit" className="btn-primary">
               Atualizar
             </button>
           </div>
