@@ -6,7 +6,7 @@ Aplicação Full Stack para cadastro, visualização, edição e exclusão de us
 
 - Frontend: React + Vite, Axios
 - Backend: Node.js, Express, MySQL
-- Estilo: CSS puro com estilo inspirado no Material Design
+- Estilo: CSS puro
 
 ## 🚀 Como rodar o projeto
 
@@ -50,7 +50,7 @@ npm install
 - dotenv
 - mysql2
 
-#### 🔐 Modifique o arquivo `.env` com as variáveis do banco:
+#### 🔐 Crie o arquivo `.env` com as variáveis do banco:
 
 ```env
 DB_HOST=localhost
