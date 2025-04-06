@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import "../styles/DetalhesUsuario.css";
 
-// Função para gerar cores (igual à usada na lista de usuários)
+// Função para gerar cores
 const generateUserColor = (userId) => {
   const colors = [
     "#E57373", "#F06292", "#BA68C8", "#9575CD",

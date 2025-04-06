@@ -1,30 +1,58 @@
-import { db } from "../db.js";
+const db = require("../db");
 
-const executeQuery = (query, params, res, successMessage) => {
-  db.query(query, params, (err, data) => {
-    if (err) return res.status(500).json(err);
-    return res.status(200).json({ message: successMessage, data });
+// Retorna todos os usuários
+exports.getUsers = (req, res) => {
+  const query = "SELECT * FROM usuarios";
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    return res.json(results);
   });
 };
 
-export const getUsers = (_, res) => {
-  const q = "SELECT * FROM usuarios";
-  executeQuery(q, [], res, "Usuários carregados com sucesso");
+// Retorna um usuário por ID
+exports.getUserById = (req, res) => {
+  const { id } = req.params;
+  const query = "SELECT * FROM usuarios WHERE id = ?";
+  db.query(query, [id], (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (results.length === 0) return res.status(404).json({ message: "Usuário não encontrado" });
+    return res.json(results[0]);
+  });
 };
 
-export const addUser = (req, res) => {
-  const q = "INSERT INTO usuarios (`name`, `email`, `phone`) VALUES (?)";
-  const values = [req.body.name, req.body.email, req.body.phone];
-  executeQuery(q, [values], res, "Usuário criado com sucesso");
+// Cria um novo usuário
+exports.addUser = (req, res) => {
+  const { nome, anoNascimento, endereco, genero, cpf, email } = req.body;
+  
+  if (!nome || !anoNascimento || !endereco || !genero || !cpf || !email) {
+    return res.status(400).json({ message: "Todos os campos são obrigatórios" });
+  }
+
+  const query = "INSERT INTO usuarios (nome, anoNascimento, endereco, genero, cpf, email) VALUES (?, ?, ?, ?, ?, ?)";
+  db.query(query, [nome, anoNascimento, endereco, genero, cpf, email], (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(201).json({ id: result.insertId, nome, anoNascimento, endereco, genero, cpf, email });
+  });
 };
 
-export const updateUser = (req, res) => {
-  const q = "UPDATE usuarios SET `name` = ?, `email` = ?, `phone` = ? WHERE `id` = ?";
-  const values = [req.body.name, req.body.email, req.body.phone, req.params.id];
-  executeQuery(q, values, res, "Usuário atualizado com sucesso");
+// Atualiza um usuário existente
+exports.updateUser = (req, res) => {
+  const { id } = req.params;
+  const { nome, anoNascimento, endereco, genero, cpf, email } = req.body;
+  const query = "UPDATE usuarios SET nome = ?, anoNascimento = ?, endereco = ?, genero = ?, cpf = ?, email = ? WHERE id = ?";
+
+  db.query(query, [nome, anoNascimento, endereco, genero, cpf, email, id], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: "Usuário atualizado com sucesso" });
+  });
 };
 
-export const deleteUser = (req, res) => {
-  const q = "DELETE FROM usuarios WHERE `id` = ?";
-  executeQuery(q, [req.params.id], res, "Usuário deletado com sucesso");
+// Deleta um usuário
+exports.deleteUser = (req, res) => {
+  const { id } = req.params;
+  const query = "DELETE FROM usuarios WHERE id = ?";
+  db.query(query, [id], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: "Usuário deletado com sucesso" });
+  });
 };
